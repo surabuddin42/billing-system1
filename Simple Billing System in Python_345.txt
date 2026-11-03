@@ -1,0 +1,60 @@
+# Simple Billing System in Python
+
+print("=" * 45)
+print("          SHOP BILLING SYSTEM")
+print("=" * 45)
+
+customer_name = input("Enter customer name: ")
+
+items = []
+subtotal = 0
+
+while True:
+    item_name = input("\nEnter item name (or 'done' to finish): ")
+
+    if item_name.lower() == "done":
+        break
+
+    price = float(input("Enter price: ₹"))
+    quantity = int(input("Enter quantity: "))
+
+    total = price * quantity
+    subtotal += total
+
+    items.append([item_name, price, quantity, total])
+
+# GST and discount
+gst = subtotal * 0.18
+
+if subtotal >= 5000:
+    discount = subtotal * 0.10
+elif subtotal >= 2000:
+    discount = subtotal * 0.05
+else:
+    discount = 0
+
+grand_total = subtotal + gst - discount
+
+# Print bill
+print("\n")
+print("=" * 55)
+print("                    FINAL BILL")
+print("=" * 55)
+print("Customer:", customer_name)
+print("-" * 55)
+
+print(f"{'Item':<20}{'Price':>10}{'Qty':>8}{'Total':>12}")
+print("-" * 55)
+
+for item in items:
+    print(f"{item[0]:<20}{item[1]:>10.2f}{item[2]:>8}{item[3]:>12.2f}")
+
+print("-" * 55)
+print(f"{'Subtotal':<40} ₹{subtotal:>10.2f}")
+print(f"{'GST (18%)':<40} ₹{gst:>10.2f}")
+print(f"{'Discount':<40} ₹{discount:>10.2f}")
+print("-" * 55)
+print(f"{'GRAND TOTAL':<40} ₹{grand_total:>10.2f}")
+print("=" * 55)
+print("       Thank you for shopping!")
+print("=" * 55)
